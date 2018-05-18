@@ -33,6 +33,30 @@ describe('RecordStore', function () {
               genre: 'rock',
               price: 45
             });
+    record5 = new Record({
+              title: 'The Joshua Tree',
+              artist: 'U2',
+              genre: 'rock',
+              price: 45
+            });
+    record6 = new Record({
+              title: 'Hunky Dory',
+              artist: 'Cover Band',
+              genre: 'pop',
+              price: 23
+            });
+    record7 = new Record({
+              title: 'Theatre Is Evil',
+              artist: 'Amanda Palmer',
+              genre: 'rock',
+              price: 30
+            });
+    record8 = new Record({
+              title: 'Who Killed Amanda Palmer',
+              artist: 'Amanda Palmer',
+              genre: 'rock',
+              price: 33
+            });
   });
 
   it('should have a name', function () {
@@ -78,6 +102,59 @@ describe('RecordStore', function () {
 
       assert.strictEqual(recordStore.recordCollection.length, 3);
       assert.strictEqual(actual, record3);
+    });
+
+    it('should be able to find records by genre', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record7);
+      recordStore.addRecordToCollection(record8);
+      const actual = recordStore.findRecordsByGenre('rock');
+
+      assert.deepStrictEqual(actual, [record4, record5, record7, record8]);
+    });
+
+    it('should be able to find records by title', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record6);
+      const actual = recordStore.findRecordsByTitle('Hunky Dory');
+
+      assert.deepStrictEqual(actual, [record4, record6]);
+    });
+
+    it('should be able to find records by artist', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record6);
+      recordStore.addRecordToCollection(record7);
+      recordStore.addRecordToCollection(record8);
+      const actual = recordStore.findRecordsByArtist('Amanda Palmer');
+
+      assert.deepStrictEqual(actual, [record1, record7, record8]);
+    });
+
+    it('should be able to find records by multiple attributes', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record6);
+      recordStore.addRecordToCollection(record7);
+      recordStore.addRecordToCollection(record8);
+      const actual = recordStore.findRecordsByAttributes({artist: 'Amanda Palmer', genre: 'rock'});
+
+      assert.deepStrictEqual(actual, [record7, record8]);
     });
 
 });

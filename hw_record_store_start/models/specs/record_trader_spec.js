@@ -62,8 +62,8 @@ describe('RecordTrader', function () {
     recordTrader.addRecordToCollection(record2);
     recordTrader.addRecordToCollection(record3);
     recordTrader.addRecordToCollection(record4);
-    const actual = recordTrader.findRecordByTitle('Evelyn Evelyn');
-    assert.deepStrictEqual(actual, [record1]);
+    const actual = recordTrader.findSingleRecordByTitle('Evelyn Evelyn');
+    assert.deepStrictEqual(actual, record1);
   });
 
   it('should be able to remove a record from collection', function () {
