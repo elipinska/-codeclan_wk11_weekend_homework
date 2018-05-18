@@ -4,7 +4,8 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "test": "mocha models/specs"
+    "test": "mocha models/specs",
+    "debug": "mocha models/specs --inspect-brk"
   },
   "keywords": [],
   "author": "",

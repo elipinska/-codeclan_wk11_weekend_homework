@@ -13,14 +13,12 @@ RecordTrader.prototype.addRecordToCollection = function(record) {
   this.recordCollection.push(record);
 }
 
-RecordTrader.prototype.findRecordByTitle = function(title) {
-  recordsFound = []
-  this.recordCollection.forEach((record) => {
+RecordTrader.prototype.findSingleRecordByTitle = function(title) {
+  return this.recordCollection.find((record) => {
     if (record.title === title) {
-      recordsFound.push(record);
+      return record;
     }
   });
-  return recordsFound;
 }
 
 RecordTrader.prototype.removeRecordFromCollection = function(record) {

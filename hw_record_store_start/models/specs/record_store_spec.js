@@ -143,7 +143,7 @@ describe('RecordStore', function () {
       assert.deepStrictEqual(actual, [record1, record7, record8]);
     });
 
-    it('should be able to find records by multiple attributes', function () {
+    it('should be able to find records by two attributes', function () {
       recordStore.addRecordToCollection(record1);
       recordStore.addRecordToCollection(record2);
       recordStore.addRecordToCollection(record3);
@@ -155,6 +155,56 @@ describe('RecordStore', function () {
       const actual = recordStore.findRecordsByAttributes({artist: 'Amanda Palmer', genre: 'rock'});
 
       assert.deepStrictEqual(actual, [record7, record8]);
+    });
+
+    it('should be able to find records by one attribute', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record6);
+      recordStore.addRecordToCollection(record7);
+      recordStore.addRecordToCollection(record8);
+      const actual = recordStore.findRecordsByAttributes({price: 45});
+
+      assert.deepStrictEqual(actual, [record4, record5]);
+    });
+
+    it('should be able to find records by four attributes', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record6);
+      recordStore.addRecordToCollection(record7);
+      recordStore.addRecordToCollection(record8);
+      const actual = recordStore.findRecordsByAttributes({
+                title: 'Master of Puppets',
+                artist: 'Metallica',
+                genre: 'metal',
+                price: 15
+              });
+
+      assert.deepStrictEqual(actual, [record3]);
+    });
+
+    it('should return an empty array if no records match a query', function () {
+      recordStore.addRecordToCollection(record1);
+      recordStore.addRecordToCollection(record2);
+      recordStore.addRecordToCollection(record3);
+      recordStore.addRecordToCollection(record4);
+      recordStore.addRecordToCollection(record5);
+      recordStore.addRecordToCollection(record6);
+      recordStore.addRecordToCollection(record7);
+      recordStore.addRecordToCollection(record8);
+      const actual = recordStore.findRecordsByAttributes({
+                artist: 'Beyonce',
+                genre: 'pop'
+              });
+
+      assert.deepStrictEqual(actual, []);
     });
 
 });
